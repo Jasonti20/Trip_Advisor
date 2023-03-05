@@ -26,7 +26,9 @@
       <button type="submit" class="mt-4 btn-pers" id="login_button">
         Login
       </button>
-      <button type="submit" class="mt-4 btn-pers">Login with Google</button>
+      <button type="button" class="mt-4 btn-pers" @click="loginWithGoogle">
+        Login with Google
+      </button>
       <div
         class="alert alert-warning alert-dismissible fade show mt-5 d-none"
         role="alert"
@@ -45,7 +47,12 @@
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 export default {
   data() {
@@ -77,6 +84,24 @@ export default {
     },
     moveToRegister() {
       this.$router.push("/register");
+    },
+    loginWithGoogle() {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then(() => {
+          this.$router.push("/dashboard");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode);
+          console.log(errorMessage);
+          let alert_1 = document.querySelector("#alert_1");
+          alert_1.classList.remove("d-none");
+          alert_1.innerHTML = errorMessage;
+          console.log(alert_1);
+        });
     },
   },
 };
