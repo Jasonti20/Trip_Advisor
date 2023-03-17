@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "ant-design-vue": "^3.2.15",
+    "antd": "^5.3.1",
     "core-js": "^3.8.3",
     "firebase": "^9.17.2",
     "vue": "^3.2.13",
