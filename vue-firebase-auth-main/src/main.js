@@ -1,11 +1,15 @@
-import { createApp } from "vue";
+import { createApp, VueElement } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
-createApp(App).use(router).mount("#app");
-
+import Antd from "ant-design-vue";
+import "ant-design-vue/dist/antd.css";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.css'
+
+createApp(App).use(router).use(Antd).mount("#app");
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

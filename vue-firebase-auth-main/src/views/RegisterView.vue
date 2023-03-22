@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="container">
     <form @submit.prevent="register">
       <h2 class="mb-3">Register</h2>
@@ -43,6 +44,7 @@
       </div>
     </form>
   </div>
+  </div>
 </template>
 
 <script>
@@ -82,7 +84,7 @@ export default {
         });
     },
     moveToLogin() {
-      this.$router.push("/");
+      this.$router.push("/mainpage");
     },
   },
 };

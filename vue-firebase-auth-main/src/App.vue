@@ -1,5 +1,10 @@
+
+import MainPage from './views/MainPage.vue';
+
 <template>
-  <div class="background"></div>
+  <div class="background">
+    <MainPage />
+  </div>
   <div class="navbar">
     <nav class="nav">
       <div class="nav-el" id="name_project">
@@ -14,11 +19,15 @@
     </nav>
   </div>
   <router-view id="content" />
+  
 </template>
 
 <style>
 /* CUSTOM STYLE */
 
+#myc {
+
+}
 #content {
   position: absolute;
   top: 50%;
