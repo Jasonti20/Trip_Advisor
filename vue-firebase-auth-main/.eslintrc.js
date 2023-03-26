@@ -10,6 +10,7 @@ module.exports = {
   ],
   parserOptions: {
     parser: "@babel/eslint-parser",
+    ecmaVersion: 6
   },
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",

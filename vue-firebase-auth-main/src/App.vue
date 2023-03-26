@@ -25,9 +25,6 @@ import MainPage from './views/MainPage.vue';
 <style>
 /* CUSTOM STYLE */
 
-#myc {
-
-}
 #content {
   position: absolute;
   top: 50%;
