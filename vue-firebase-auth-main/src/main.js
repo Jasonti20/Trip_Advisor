@@ -8,6 +8,8 @@ import "ant-design-vue/dist/antd.css";
 import { initializeApp } from "firebase/app";
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth"; 
 
 createApp(App).use(router).use(Antd).mount("#app");
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,5 +27,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export { app };
+export const app = initializeApp(firebaseConfig);
+// Get a Firestore instance
+export const auth = getAuth(app);
+export const db = getFirestore(app);

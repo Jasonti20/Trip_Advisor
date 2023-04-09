@@ -32,6 +32,15 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: "/plan",
+    name: "plan",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/PlanView.vue"),
+    meta: {
+      authRequired: false,
+    },
+  },
 ];
 
 const router = createRouter({
