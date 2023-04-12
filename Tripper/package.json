@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "(cd vue && npm run serve) & (cd back && node server.js)"
+    "start": "(cd front && npm run serve) & (cd back && node server.js)"
   },
   "author": "jl",
   "license": "ISC",
