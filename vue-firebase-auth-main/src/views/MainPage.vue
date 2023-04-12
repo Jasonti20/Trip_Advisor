@@ -38,59 +38,63 @@
 <script>
 import { defineComponent, reactive } from "vue";
 import { useRouter } from "vue-router";
+import axios from "axios";
 
 export default defineComponent({
   setup() {
     const formItemLayout = {
-      labelCol: {
-        xs: {
-          span: 24,
-        },
-        sm: {
-          span: 8,
-        },
-      },
-      wrapperCol: {
-        xs: {
-          span: 24,
-        },
-        sm: {
-          span: 16,
-        },
-      },
+      // layout options
     };
     const config = {
-      rules: [
-        {
-          type: "string",
-          required: true,
-          message: "Please input a city!",
-        },
-      ],
+      // form validation rules
     };
     const rangeConfig = {
-      rules: [
-        {
-          type: "array",
-          required: true,
-          message: "Please select time!",
-        },
-      ],
+      // form validation rules for range picker
     };
     const formState = reactive({});
     const router = useRouter();
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
       console.log("Success:", values, formState);
+
+      // create a JSON object from the form data
+      const formData = {
+        destination: formState.destination,
+        rangeTimePicker: formState.rangeTimePicker,
+      };
+
+      try {
+        // send a POST request to the server with the form data
+        const response = await axios.post(
+          "http://localhost:8080/submit-form",
+          formData
+        );
+
+        console.log(response.data); // response from the server
+
+        // navigate to the /plan route and pass the response data as a query parameter
+        router.push({
+          name: "plan",
+          query: { response: JSON.stringify(response.data), result: formData },
+        });
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     const onFinishFailed = (errorInfo) => {
       console.log("Failed:", errorInfo);
     };
 
-    const plan = () => {
-      // perform any necessary checks before navigating
-      router.push("/plan");
+    const plan = async () => {
+      try {
+        // Trigger the onFinish function to submit the form data
+        await onFinish();
+        // navigate to the /plan page
+        router.push("/plan");
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     return {

@@ -1,12 +1,12 @@
 <template>
   <div class="card-wrapper">
-    <div v-for="(card, index) in cards" :key="index" class="card-container">
+    <div class="card-container">
       <div class="card bg-dark text-white">
         <div class="card-body">
-          <h5 class="card-title">{{ card.title }}</h5>
-          <h6 class="card-subtitle mb-2">{{ card.subtitle }}</h6>
-          <p class="card-text">{{ card.content }}</p>
-          <button @click="saveToFirestore(card)">Save</button>
+          <h5 class="card-title">Test</h5>
+          <h6 class="card-subtitle mb-2">Test</h6>
+          <p class="card-text">{{ response.content }}</p>
+          <button @click="saveToFirestore(response)">Save</button>
         </div>
       </div>
     </div>
@@ -14,43 +14,34 @@
 </template>
 
 <script>
-// Import the auth and db objects from your main.js file
 import { auth, db } from "../main.js";
 import { collection, doc, addDoc } from "firebase/firestore";
 
 export default {
   data() {
     return {
-      cards: [
-        {
-          title: "Card 1",
-          subtitle: "Subtitle 1",
-          content: "Content 1",
-        },
-        {
-          title: "Card 2",
-          subtitle: "Subtitle 2",
-          content: "Content 2",
-        },
-        {
-          title: "Card 3",
-          subtitle: "Subtitle 3",
-          content: "Content 3",
-        },
-      ],
+      response: null,
+      // destination: null,
+      // timerange: null,
     };
   },
+  mounted() {
+    this.response = JSON.parse(this.$route.query.response);
+    // this.destination = JSON.parse(this.$route.query.result).destination;
+    // this.timerange = JSON.parse(this.$route.query.result).rangeTimePicker;
+  },
+
   methods: {
-    saveToFirestore(card) {
+    saveToFirestore(response) {
       const currentUser = auth.currentUser;
       if (currentUser) {
         const userId = currentUser.uid;
-        addDoc(collection(doc(collection(db, "plan"), userId), "cards"), 
-        {
+        console.log("Result: ", this.result);
+        addDoc(collection(doc(collection(db, "plan"), userId), "cards"), {
           uId: userId,
-          title: card.title,
-          subtitle: card.subtitle,
-          content: card.content,
+          // title: Test,
+          // subtitle: this.timerange.content,
+          content: response.content,
         })
           .then(() => {
             console.log("Card added to Firestore!");
@@ -99,3 +90,5 @@ export default {
   overflow: hidden;
 }
 </style>
+
+
