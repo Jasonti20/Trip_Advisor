@@ -1,0 +1,1 @@
+.card-wrapper{display:flex;flex-direction:row;justify-content:center;height:600px}.card-container{margin-right:20px;max-width:500px}.scrollable{max-height:200px;overflow:auto}.card{max-width:500px;height:500px;opacity:transparent}.card-title{font-size:1.5rem;color:#fff}.card-subtitle{font-size:1.2rem;color:#fff}.card-text{font-size:1.2rem;max-height:600px;overflow:hidden}
