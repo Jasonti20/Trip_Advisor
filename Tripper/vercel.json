@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "front/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "front"
+        }
+      },
+      {
+        "src": "back/server.js",
+        "use": "@vercel/node",
+        "config": {
+          "env": {
+            "OPENAI_API_KEY":"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"
+          }
+        }
+      }
+    ],
+    "routes": [
+      { "src": "/front/(.*)", "dest": "/front/$1" },
+      { "src": "/back/(.*)", "dest": "/back/$1" },
+      { "src": "/(.*)", "dest": "/back/server.js" }
+    ]
+  }
+  
